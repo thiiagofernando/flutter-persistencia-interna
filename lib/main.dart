@@ -1,3 +1,4 @@
+import 'package:BytBank/screens/contato_formulario_screens.dart';
 import 'package:flutter/material.dart';
 
 import 'screens/dashboard.screens.dart';
@@ -20,8 +21,7 @@ class ByteBankApp extends StatelessWidget {
           textTheme: ButtonTextTheme.primary,
         ),
       ),
-      home:Dashboard(),
+      home: ContatoFormulario(),
     );
   }
 }
-
