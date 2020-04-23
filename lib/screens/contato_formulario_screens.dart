@@ -1,3 +1,4 @@
+import 'package:BytBank/database/dao/contact_dao.dart';
 import 'package:BytBank/models/contact.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,7 @@ class _ContatoFormularioState extends State<ContatoFormulario> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _accountNumberController =
       TextEditingController();
-
+  final ContactDao _dao =  ContactDao();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +30,6 @@ class _ContatoFormularioState extends State<ContatoFormulario> {
               style: TextStyle(
                 fontSize: 24.0,
               ),
-              keyboardType: TextInputType.text,
             ),
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
@@ -41,7 +41,7 @@ class _ContatoFormularioState extends State<ContatoFormulario> {
                 style: TextStyle(
                   fontSize: 24.0,
                 ),
-                keyboardType: TextInputType.text
+                keyboardType: TextInputType.number,
               ),
             ),
             Padding(
@@ -50,13 +50,13 @@ class _ContatoFormularioState extends State<ContatoFormulario> {
                 width: double.maxFinite,
                 child: RaisedButton(
                   color: Colors.green[900],
-                  child: Text("Salvar"),
+                  child: Text("Salvar Contato"),
                   onPressed: () {
                     final String name = _nameController.text;
-                    final int acccount =
+                    final int acccountNumber =
                         int.tryParse(_accountNumberController.text);
-                    final Contact newContact = Contact(0,name, acccount);
-                    Navigator.pop(context, newContact);
+                    final Contact newContact = Contact(0, name, acccountNumber);
+                    _dao.save(newContact).then((id) => Navigator.pop(context));
                   },
                 ),
               ),

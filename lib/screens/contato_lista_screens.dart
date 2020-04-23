@@ -1,10 +1,16 @@
-import 'package:BytBank/database/app_database.dart';
+import 'package:BytBank/database/dao/contact_dao.dart';
 import 'package:BytBank/models/contact.dart';
 import 'package:BytBank/screens/contato_formulario_screens.dart';
 import 'package:flutter/material.dart';
 
-class ContatoLista extends StatelessWidget {
+class ContatoLista extends StatefulWidget {
   @override
+  _ContatoListaState createState() => _ContatoListaState();
+}
+
+class _ContatoListaState extends State<ContatoLista> {
+  @override
+  final ContactDao _dao =  ContactDao();
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -12,7 +18,7 @@ class ContatoLista extends StatelessWidget {
       ),
       body: FutureBuilder<List<Contact>>(
           initialData: List(),
-          future: buscarTodos(),
+          future: _dao.findAll(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -45,14 +51,13 @@ class ContatoLista extends StatelessWidget {
             return Text("Falha no Sistema, feche e abra novamente");
           }),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context)
-              .push(
-                MaterialPageRoute(builder: (context) => ContatoFormulario()),
-              )
-              .then(
-                (newContato) => debugPrint(newContato.toString()),
-              );
+        onPressed: () async {
+          await Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => ContatoFormulario(),
+            ),
+          );
+          setState(() {});
         },
         child: Icon(
           Icons.add,
@@ -64,7 +69,9 @@ class ContatoLista extends StatelessWidget {
 
 class _ContatoItem extends StatelessWidget {
   final Contact contact;
+
   _ContatoItem(this.contact);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -72,7 +79,7 @@ class _ContatoItem extends StatelessWidget {
         title: Text(
           contact.name,
           style: TextStyle(
-            fontSize: 20.0,
+            fontSize: 24.0,
           ),
         ),
         subtitle: Text(
