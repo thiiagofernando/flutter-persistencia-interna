@@ -41,7 +41,7 @@ class _ContatoFormularioState extends State<ContatoFormulario> {
                 style: TextStyle(
                   fontSize: 24.0,
                 ),
-                keyboardType: TextInputType.text,
+                keyboardType: TextInputType.text
               ),
             ),
             Padding(
@@ -55,7 +55,7 @@ class _ContatoFormularioState extends State<ContatoFormulario> {
                     final String name = _nameController.text;
                     final int acccount =
                         int.tryParse(_accountNumberController.text);
-                    final Contact newContact = Contact(name, acccount);
+                    final Contact newContact = Contact(0,name, acccount);
                     Navigator.pop(context, newContact);
                   },
                 ),
