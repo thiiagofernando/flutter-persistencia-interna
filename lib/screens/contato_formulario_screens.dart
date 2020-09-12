@@ -11,7 +11,7 @@ class _ContatoFormularioState extends State<ContatoFormulario> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _accountNumberController =
       TextEditingController();
-  final ContactDao _dao =  ContactDao();
+  final ContactDao _dao = ContactDao();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +49,7 @@ class _ContatoFormularioState extends State<ContatoFormulario> {
               child: SizedBox(
                 width: double.maxFinite,
                 child: RaisedButton(
-                  color: Colors.green[900],
+                  color: Colors.red[900],
                   child: Text("Salvar Contato"),
                   onPressed: () {
                     final String name = _nameController.text;
