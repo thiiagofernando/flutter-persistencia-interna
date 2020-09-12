@@ -10,11 +10,11 @@ class ContatoLista extends StatefulWidget {
 
 class _ContatoListaState extends State<ContatoLista> {
   @override
-  final ContactDao _dao =  ContactDao();
+  final ContactDao _dao = ContactDao();
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Contatos"),
+        title: Text("Transfer"),
       ),
       body: FutureBuilder<List<Contact>>(
           initialData: List(),
